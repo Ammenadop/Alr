@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap"
+    rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Dots:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sixtyfour+Convergence&display=swap"
+    rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Dots:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Protest+Strike&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <meta name="copyright" content="MACode ID, https://macodeid.com" />
+
+  <title>GrowTechs - Tech Agency</title>
+
+  <link rel="stylesheet" href="./assets/vendor/animate/animate.css" />
+
+  <link rel="stylesheet" href="./assets/css/bootstrap.css" />
+
+  <link rel="stylesheet" href="./assets/css/maicons.css" />
+  <link rel="icon" href="./assets/lgo.png" type="image/png">
+  <link rel="stylesheet" href="./assets/vendor/owl-carousel/css/owl.carousel.css" />
+
+  <link rel="stylesheet" href="./assets/css/theme.css" />
+  <script src="//unpkg.com/alpinejs" defer></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function () {
+      // https://dashboard.emailjs.com/admin/account
+      emailjs.init({
+        publicKey: "esXJQPm4pkwOazJeG",
+      });
+    })();
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+    window.onload = function () {
+      emailjs.init({
+        publicKey: "T7C8fYamUpTuGZ__7",
+      });
+      document
+        .getElementById("myForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const fullName = document.getElementById("fullName").value;
+          const phoneNumber = document.getElementById("phoneNumber").value;
+          const emailAddress = document.getElementById("emailAddress").value;
+          const projectOverview =
+            document.getElementById("projectOverview").value;
+          const checkboxes = document.querySelectorAll(".check:checked");
+          const selectedOptions = Array.from(checkboxes).map(
+            (checkbox) => checkbox.value
+          );
+          const budgetRadios = document.querySelectorAll(
+            'input[name="budget"]:checked'
+          );
+          const budget = budgetRadios.length > 0 ? budgetRadios[0].value : "";
+          var x = document.getElementById("snackbar");
+          var x1 = document.getElementById("snackbarr");
+          var bt = document.getElementById("bt");
+          var bt1 = document.getElementById("bt1");
+          bt.style.display = "none";
+          bt1.style.display = "flex"
+          var data = {
+            from_name: fullName,
+            phone: phoneNumber,
+            email: emailAddress,
+            look_for: selectedOptions.join(", "),
+            budget: budget,
+            msg: projectOverview,
+          }
+          if(data.budget==""){
+            x1.className = "show";
+              setTimeout(function () {
+                x1.className = x.className.replace("show", "");
+              }, 3000);
+            return;
+          }
+          if(data.look_for==""){
+            x1.className = "show";
+              setTimeout(function () {
+                x1.className = x.className.replace("show", "");
+              }, 3000);
+            return;
+          }
+          emailjs.send('service_kz6i4xr', 'template_6zsa7jl', data).then(
+            (response) => {
+              x.className = "show";
+              setTimeout(function () {
+                x.className = x.className.replace("show", "");
+                bt.style.display = "flex";
+                bt1.style.display = "none"
+                document.getElementById('myForm').reset();
+              }, 3000);
+            },
+            (error) => {
+              alert("Something went wrong!")
+            },
+          );
+        });
+    };
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var words = document.getElementsByClassName("word");
+      var wordArray = [];
+      var currentWord = 0;
+      words[currentWord].style.opacity = 1;
+      for (var i = 0; i < words.length; i++) {
+        splitLetters(words[i]);
+      }
+
+      function changeWord() {
+        var cw = wordArray[currentWord];
+        var nw =
+          currentWord == words.length - 1
+            ? wordArray[0]
+            : wordArray[currentWord + 1];
+        for (var i = 0; i < cw.length; i++) {
+          animateLetterOut(cw, i);
+        }
+
+        for (var i = 0; i < nw.length; i++) {
+          nw[i].className = "letter behind";
+          nw[0].parentElement.style.opacity = 1;
+          animateLetterIn(nw, i);
+        }
+
+        currentWord =
+          currentWord == wordArray.length - 1 ? 0 : currentWord + 1;
+      }
+
+      function animateLetterOut(cw, i) {
+        setTimeout(function () {
+          cw[i].className = "letter out";
+        }, i * 80);
+      }
+
+      function animateLetterIn(nw, i) {
+        setTimeout(function () {
+          nw[i].className = "letter in";
+        }, 340 + i * 80);
+      }
+
+      function splitLetters(word) {
+        var content = word.innerHTML;
+        word.innerHTML = "";
+        var letters = [];
+        for (var i = 0; i < content.length; i++) {
+          var letter = document.createElement("span");
+          letter.className = "letter";
+          letter.innerHTML = content.charAt(i);
+          word.appendChild(letter);
+          letters.push(letter);
+        }
+
+        wordArray.push(letters);
+      }
+
+      changeWord();
+      setInterval(changeWord, 4000);
+    });
+  </script>
+
+  <style>
+    .image-container {
+      display: flex;
+      gap: 50px;
+      /* Adds space between images */
+    }
+
+    .mq {
+      font-family: "Sixtyfour Convergence", sans-serif;
+    }
+    .dis{
+      display: none;
+    }
+    .dis1{
+      display: block;
+    }
+    body {
+      font-family: "Merriweather", serif;
+      font-weight: 300;
+      font-style: normal;
+    }
+
+    .text {
+      text-align: center;
+      margin-top: -20px;
+      margin-bottom: 30px;
+    }
+
+    .word {
+      position: absolute;
+      opacity: 0;
+    }
+
+    .letter {
+      display: inline-block;
+      position: relative;
+      transform: translateZ(25px);
+      transform-origin: 50% 50% 25px;
+    }
+
+    .letter.out {
+      transform: rotateX(90deg);
+      transition: transform 0.32s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+      display: none;
+    }
+
+    .letter.behind {
+      transform: rotateX(-90deg);
+    }
+
+    .letter.in {
+      transform: rotateX(0deg);
+      transition: transform 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: inline-block;
+    }
+
+    .wisteria {
+      color: #8e44ad;
+      font-weight: 900;
+    }
+
+    .belize {
+      color: #004AAD;
+      font-weight: 900;
+    }
+
+    .pomegranate {
+      color: #c0392b;
+      font-weight: 900;
+    }
+
+    .green {
+      color: #16a085;
+    }
+
+    .midnight {
+      color: #2c3e50;
+    }
+
+    .geek1 {
+      font-size: 30px;
+      font-weight: bold;
+      color: white;
+      padding-bottom: 10px;
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      appearance: none;
+      outline: 0.1em solid white;
+      height: 15px;
+      width: 15px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    input[type="radio"]:checked,
+    input[type="checkbox"]:checked {
+      display: inline-block;
+      background-color: white;
+    }
+
+    input[type="text"] {
+      color: white;
+    }
+
+    input[type="text"]:focus {
+      color: white;
+    }
+
+    .form-control {
+      color: white;
+    }
+
+    .form-control:focus {
+      color: white;
+    }
+
+    #snackbar {
+      visibility: hidden;
+      min-width: 250px;
+      margin-left: -125px;
+      background-color: rgb(73, 221, 73);
+      color: #fff;
+      text-align: center;
+      border-radius: 5px;
+      padding: 16px;
+      position: fixed;
+      z-index: 9999;
+      left: 50%;
+      top: 30px;
+      font-size: 17px;
+    }
+    #snackbarr {
+      visibility: hidden;
+      min-width: 250px;
+      margin-left: -125px;
+      background-color: rgb(255, 0, 0);
+      color: #fff;
+      text-align: center;
+      border-radius: 5px;
+      padding: 16px;
+      position: fixed;
+      z-index: 9999;
+      left: 50%;
+      top: 30px;
+      font-size: 17px;
+    }
+
+    #snackbar.show , #snackbarr.show {
+      visibility: visible;
+      -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    @-webkit-keyframes fadein {
+      from {
+        top: 0;
+        opacity: 0;
+      }
+
+      to {
+        top: 30px;
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadein {
+      from {
+        top: 0;
+        opacity: 0;
+      }
+
+      to {
+        top: 30px;
+        opacity: 1;
+      }
+    }
+
+    @-webkit-keyframes fadeout {
+      from {
+        top: 30px;
+        opacity: 1;
+      }
+
+      to {
+        top: 0;
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeout {
+      from {
+        top: 30px;
+        opacity: 1;
+      }
+
+      to {
+        top: 0;
+        opacity: 0;
+      }
+    }
+
+    .petext {
+      font-size: 30px;
+      font-family: "Protest Strike", sans-serif;
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    p {
+      margin-bottom: 2rem;
+    }
+
+    .move {
+      margin-top: -5.1rem;
+      background-color: white;
+      padding-top: 10px;
+    }
+
+    .txt {
+      font-family: "Protest Strike", sans-serif;
+      font-style: normal;
+    }
+
+    .opp {
+      padding-bottom: 200px;
+    }
+
+    .testi-content {
+      min-height: 230px;
+    }
+
+    @media only screen and (max-width:991px) {
+      .testi-content {
+        min-height: 10px;
+        height: fit-content;
+      }
+    }
+    .spinner {
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  box-sizing: border-box;
+  border-top: 2px solid white;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-radius: 100%;
+  animation: spin 0.6s ease-out infinite;
+  margin-bottom: -2px;
+  margin-left: 10px;
+}
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+  </style>
+</head>
+
+<body>
+  <!-- Back to top button -->
+  <div class="back-to-top"></div>
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-float">
+      <div class="container">
+        <a href="index.html">
+          <!-- Heu<span class="text-primary">jia.</span> -->
+          <img src="./assets/logo.png" style="width: 150px; object-fit: contain; margin: 0; padding: 0" />
+        </a>
+
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse collapse" id="navbarContent">
+          <ul class="navbar-nav ml-lg-4 pt-3 pt-lg-0">
+            <li class="nav-item active">
+              <a href="index.html" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="about.html" class="nav-link">About</a>
+            </li>
+            <li class="nav-item">
+              <a href="./assets/Brochure Growtechs.pdf" target="_blank" class="nav-link">Brochure</a>
+            </li>
+            <li class="nav-item">
+              <a href="contact.html" class="nav-link">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid mt-1 ma">
+      <h1 class="text-center font-weight-bolder txt wow fadeInUp " style="
+            color: #CB6CE6;
+            margin-top: 9rem;
+            margin-bottom: 3rem;
+            font-weight: 900;
+          ">
+        TAKING BRANDS FORWARD WITH SMART SOLUTIONS
+      </h1>
+
+      <div class="text text-center mx-auto">
+        <p class="petext" style="margin-left: -5rem;margin-top: 2rem; display: inline-block;font-size: 24px;">
+          Your partner in
+        </p>
+        <p class="petext" style="display: inline-block; font-weight: 900;">
+          <span class="word wisteria">GROWTH.</span>
+          <span class="word belize">INNOVATION.</span>
+          <span class="word pomegranate">SUCCESS.</span>
+        </p>
+      </div>
+
+      <div class="row h-100">
+        <div class="col-lg-12 hed">
+          <div x-data="{ show: false }" x-show="show" x-init="console.log(show);setTimeout(() => {show = true;}, 500);">
+            <img :class="show==true ? 'd-block' : ''" class="d-none wow fadeInDown icebal"
+              src="./assets/img/ball.png" />
+            <img :class="show==true ? 'd-block' : ''" class="d-none wow fadeInLeft astr"
+              src="./assets/img/spaceman.png" />
+            <div style="display: flex; justify-content: space-between">
+              <div class="lft"></div>
+              <div class="lft1">
+                <div class="owl-carousel dol wow fadeInUp" id="testimonials1">
+                  <div class="item" style="margin-right: 15px">
+                    <div class="row align-items-center">
+                      <div class="col-md-12 py-3">
+                        <div class="testi-image" style="width: 100%; height: 350px">
+                          <img style="height: 350px;object-fit: cover;" src="./assets/astro.webp" alt="" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-section opp">
+      <div class="move">
+        <marquee direction="left" loop="">
+          <div class="geek1 mq">Driven by technology and creativity.</div>
+        </marquee>
+      </div>
+    </div>
+    <div class="container mt-1">
+      <div class="page-banners">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-md-12">
+            <h1 class="text-center font-weight-bold mb-4" style="color: white">
+              Our <span style="color: #CB6CE6">Story</span>
+            </h1>
+            <div class="divider mx-auto"></div>
+            <p style="text-align: justify">
+              Growing isn't just a goal for us; it's a process. Our story
+              began with the realization that businesses in India need more
+              than just marketing—they need holistic solutions that blend
+              technology, strategy, and communication. We founded Growtechs to
+              become that one-stop solution, providing a unique combination of
+              Applications & MIS, Branding & Digital Marketing, and PR Events.
+              Our mission is simple, to empower businesses to grow, scale, and
+              thrive in an increasingly digital world. With our expertise and
+              passion, we help brands like yours navigate the ever-changing
+              landscape of technology and media.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container" style="margin-top: 4rem">
+      <div class="text-center wow fadeInUp">
+        <h2 class="title-section">Helping You <span style="color: #CB6CE6">Grow</span>, Every Step of the Way</h2>
+        <div class="divider mx-auto"></div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-auto py-3 wow fadeInLeft">
+          <a href="services.html" style="text-decoration: none">
+            <div class="card-pricing" style="background-color: rgb(30, 28, 28)">
+              <div class="header">
+                <div class="price-title">Applications & MIS</div>
+                <img style="
+                      width: 150px;
+                      height: 230px;
+                      margin-top: 4rem;
+                      object-fit: contain;
+                    " src="./assets/img/application.png" />
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-12 col-lg-auto py-3 wow fadeInLeft">
+          <a href="services.html" style="text-decoration: none">
+            <div class="card-pricing" style="background-color: rgb(30, 28, 28)">
+              <div class="header">
+                <div class="price-title">Branding & Digital Marketing</div>
+                <img style="
+                      width: 170px;
+                      height: 220px;
+                      margin-top: 3rem;
+                      object-fit: contain;
+                    " src="./assets/img/digital-marketing.png" />
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-12 col-lg-auto py-3 wow fadeInLeft">
+          <a href="services.html" style="text-decoration: none">
+            <div class="card-pricing" style="background-color: rgb(30, 28, 28)">
+              <div class="header">
+                <div class="price-title">
+                  &nbsp; &nbsp; &nbsp; PR & Events &nbsp; &nbsp; &nbsp;
+                </div>
+                <img style="
+                      width: 170px;
+                      height: 265px;
+                      object-fit: contain;
+                      object-position: center;
+                      margin-top: 4rem;
+                    " src="./assets/img/event-planning.png" />
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-section counter-section" style="padding:  0 0;">
+      <div class="container">
+        <div class="row align-items-center text-center">
+          <div class="col-lg-4">
+            <p>Total Clients</p>
+            <h2><span class="number" data-number="50"></span>+</h2>
+          </div>
+          <div class="col-lg-4">
+            <p>Total Projects</p>
+            <h2><span class="number" data-number="200"></span>+</h2>
+          </div>
+          <div class="col-lg-4">
+            <p>Client Satisfactions</p>
+            <h2><span class="number" data-number="97"></span>%</h2>
+          </div>
+        </div>
+      </div>
+      <!-- .container -->
+    </div>
+    <div class="page-section features" style="background-color: black">
+      <div class="container">
+        <div class="text-center">
+          <!-- <div class="subhead">Why Does Your</div> -->
+          <h2 class="title-section">
+            Why Does Your Brand <span class="marked" style="color: #CB6CE6">Need Us?</span>
+          </h2>
+          <div class="divider mx-auto"></div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-md-6 col-lg-6 py-3 wow fadeInUp">
+            <div class="d-flex flex-row">
+              <div class="img-fluid mr-3 bg-dark d-flex justify-content-center align-items-center"
+                style="height: 60px;width: 80px; border-radius: 7px">
+                <span class="mai-shapes" style="font-size: 40px;color: #CB6CE6;"></span>
+              </div>
+              <div>
+                <h5>Expertise Across Disciplines</h5>
+                <p>
+                  Whether it’s technology, marketing, or events, we have
+                  experts in every domain.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-6 py-3 wow fadeInUp">
+            <div class="d-flex flex-row">
+              <div class="img-fluid mr-3 bg-dark d-flex justify-content-center align-items-center"
+                style="height: 60px;width: 80px; border-radius: 7px">
+                <span class="mai-shapes" style="font-size: 40px;color: #CB6CE6;"></span>
+              </div>
+              <div>
+                <h5>Customized Solutions</h5>
+                <p>
+                  No two businesses are the same. We tailor our services to
+                  fit your unique needs.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-6 py-3 wow fadeInUp">
+            <div class="d-flex flex-row">
+              <div class="img-fluid mr-3 bg-dark d-flex justify-content-center align-items-center"
+                style="height: 60px;width: 90px; border-radius: 7px">
+                <span class="mai-shapes" style="font-size: 40px;color: #CB6CE6;"></span>
+              </div>
+              <div>
+                <h5>Results-Oriented</h5>
+                <p>
+                  Our focus is on helping you grow, with measurable results
+                  that matter to your business.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6 py-3 wow fadeInUp">
+            <div class="d-flex flex-row">
+              <div class="img-fluid mr-3 bg-dark d-flex justify-content-center align-items-center"
+                style="height: 60px;width: 100px; border-radius: 7px">
+                <span class="mai-shapes" style="font-size: 40px;color: #CB6CE6;"></span>
+              </div>
+              <div>
+                <h5>End-to-End Support</h5>
+                <p>
+                  From strategy to execution, we provide comprehensive support
+                  to take your brand to the next level.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-section">
+      <div class="container">
+        <div class="text-center">
+          <!-- <div class="subhead">Why Choose Us?</div> -->
+          <h2 class="title-section">
+            Excellence in
+            <span class="marked" style="color: #CB6CE6">Services &</span>
+            Endless Opportunities
+          </h2>
+          <div class="divider mx-auto"></div>
+        </div>
+
+        <div class="row mt-5 text-center">
+          <div class="col-lg-4 py-3">
+            <img src="./assets/img/evaluation.png" style="width: 70px; height: 70px; object-fit: contain" alt="" />
+            <div style="height: 20px"></div>
+            <h5>High Performance</h5>
+            <p>100% Guaranteed Performance.</p>
+          </div>
+          <div class="col-lg-4 py-3">
+            <img src="./assets/img/hand.png" style="width: 70px; height: 70px; object-fit: contain" alt="" />
+            <div style="height: 20px"></div>
+            <h5>Flexible Prices</h5>
+            <p>100% Price Transparency.</p>
+          </div>
+          <div class="col-lg-4 py-3">
+            <img src="./assets/img/clock.png" style="width: 70px; height: 70px; object-fit: contain" alt="" />
+            <div style="height: 20px"></div>
+            <h5>No time-confusing</h5>
+            <p>On Time Delivery.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-section">
+      <div class="container">
+        <div class="text-center wow fadeInUp">
+          <h2 class="title-section">
+            <span style=" color: #CB6CE6;">Success Stories</span> That Speak Louder Than Words!
+          </h2>
+          <div class="divider mx-auto"></div>
+        </div>
+        <div class="row mt-5 text-center">
+          <div class="col-lg-3 mt-4 py-1">
+            <div class="testi-content" style="border: 1px solid #CB6CE6;border-radius: 4px;padding: 10px;">
+              <p style="font-size: 16px">
+                Working with Growtechs was a game-changer for our brand.
+                Their digital marketing strategies helped us double our
+                online presence within six months.
+              </p>
+              <div class="entry-footer">
+                <strong>– Ananya Sharma </strong> &mdash;
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 mt-4 py-1">
+            <div class="testi-content" style="border: 1px solid #CB6CE6;border-radius: 4px;padding: 10px;">
+              <p style="font-size: 16px">
+                Growtechs' event management team went above and beyond for
+                our product launch. Their creativity and attention to
+                detail were outstanding!
+              </p>
+              <div class="entry-footer">
+                <strong>– Rajesh Kumar </strong> &mdash;
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 mt-4 py-1">
+            <div class="testi-content" style="border: 1px solid #CB6CE6;border-radius: 4px;padding: 10px;">
+              <p style="font-size: 16px">
+                Our MIS system developed by Growtechs transformed our
+                operational efficiency. Now, we make data-driven decisions
+                with ease.
+              </p>
+              <div class="entry-footer">
+                <strong>– Nabajyoti Rabha </strong> &mdash;
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 mt-4 py-1">
+            <div class="testi-content" style="border: 1px solid #CB6CE6;border-radius: 4px;padding: 10px;">
+              <p style="font-size: 16px">
+                The branding and PR services provided by Growtechs gave our
+                startup the exposure we needed to break into the market.
+              </p>
+              <div class="entry-footer">
+                <strong>– Rahul Verma </strong> &mdash;
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="owl-carousel wow fadeInUp" id="testimonials">
+            <div class="item">
+              <div class="row align-items-center">
+                <div class="col-md-12 py-3">
+                  <div class="testi-content">
+                    <p style="font-size: 16px">
+                      Working with Growtech was a game-changer for our brand.
+                      Their digital marketing strategies helped us double our
+                      online presence within six months.
+                    </p>
+                    <div class="entry-footer">
+                      <strong>– Ananya Sharma </strong> &mdash;
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="row align-items-center">
+                <div class="col-md-12 py-3">
+                  <div class="testi-content">
+                    <p style="font-size: 16px">
+                      Growtech's event management team went above and beyond for
+                      our product launch. Their creativity and attention to
+                      detail were outstanding!
+                    </p>
+                    <div class="entry-footer">
+                      <strong>– Rajesh Kumar </strong> &mdash;
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="row align-items-center">
+                <div class="col-md-12 py-3">
+                  <div class="testi-content">
+                    <p style="font-size: 16px">
+                      Our MIS system developed by Growtech transformed our
+                      operational efficiency. Now, we make data-driven decisions
+                      with ease.
+                    </p>
+                    <div class="entry-footer">
+                      <strong>– Meera Singh </strong> &mdash;
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="row align-items-center">
+                <div class="col-md-12 py-3">
+                  <div class="testi-content">
+                    <p style="font-size: 16px">
+                      The branding and PR services provided by Growtech gave our
+                      startup the exposure we needed to break into the market.
+                    </p>
+                    <div class="entry-footer">
+                      <strong>– Rahul Verma </strong> &mdash;
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+      </div>
+    </div>
+    <div class="page-section">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-12 py-3">
+            <h2 class="title-section">Drop Us a Line</h2>
+            <div class="divider"></div>
+
+            <form id="myForm" action="#">
+              <div class="py-2">
+                <label>Full Name <span style="color: red">*</span></label>
+                <input id="fullName" style="background-color: rgb(43, 42, 42); border: none" type="text"
+                  class="form-control" placeholder="Full name" required/>
+              </div>
+              <div class="row">
+                <div class="py-2 col-md-6">
+                  <label>Phone Number<span style="color: red">*</span></label>
+                  <input id="phoneNumber" required style="background-color: rgb(43, 42, 42); border: none" type="text"
+                    class="form-control" placeholder="Phone" />
+                </div>
+                <div class="py-2 col-md-6">
+                  <label>Email Address <span style="color: red">*</span></label>
+                  <input id="emailAddress" style="background-color: rgb(43, 42, 42); border: none" type="text"
+                    class="form-control" required placeholder="Email" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="py-2 col-md-6">
+                  <h6 style="margin-bottom: 1rem">
+                    What are you looking for?
+                  </h6>
+                  <div class="d-flex">
+                    <input type="checkbox" class="check" value="Applications & MIS" />
+                    <h6>Applications & MIS</h6>
+                  </div>
+                  <div class="d-flex">
+                    <input type="checkbox" class="check" value="Branding & Digital Marketing" />
+                    <h6>Branding & Digital Marketing</h6>
+                  </div>
+                  <div class="d-flex">
+                    <input type="checkbox" class="check" value="PR & Events" />
+                    <h6>PR & Events</h6>
+                  </div>
+                </div>
+                <div class="py-2 col-md-6">
+                  <h6 style="margin-bottom: 1rem">
+                    Do you have a budget in mind?
+                  </h6>
+                  <div class="d-flex">
+                    <input type="radio" class="radio" name="budget" value="Yes" />
+                    <h6>Yes</h6>
+                  </div>
+                  <div class="d-flex">
+                    <input type="radio" class="radio" name="budget" value="No" />
+                    <h6>No</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="py-2">
+                <label>Quick overview of your brand/business</label>
+                <textarea id="projectOverview" style="background-color: rgb(43, 42, 42); border: none" rows="6"
+                  class="form-control" required placeholder="Enter message"></textarea>
+              </div>
+              <button type="submit" id="bt" class="btn btn-primary rounded-pill mt-4 ">
+                Send Message
+              </button>
+              <button type="submit" id="bt1" class="btn btn-primary rounded-pill mt-4 dis">
+                Sending  <p class="spinner mt-1"></p>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- .container -->
+    </div>
+    <div class="page-section client-section">
+      <div class="text-center wow fadeInUp">
+        <h2 class="title-section">Our Clients</h2>
+        <div class="divider mx-auto"></div>
+      </div>
+
+      <marquee direction="left" loop="">
+        <div class="image-container">
+          <img src="./assets/img/images (1).png" alt="" height="130px" width="130px" style="border-radius: 50%" />
+          <img src="./assets/img/images (2).jpeg.jpg" alt="" height="130px" width="130px" style="border-radius: 50%" />
+          <img src="./assets/img/images (3).jpeg.jpg" alt="" height="130px" width="130px" style="border-radius: 50%" />
+          <img src="./assets/img/images (4).jpeg.jpg" alt="" height="130px" width="130px" style="border-radius: 50%" />
+          <img src="./assets/img/neate.jpeg" alt="" height="130px" width="130px" style="border-radius: 50%" />
+          <img src="./assets/img/images (6).jpeg.jpg" alt="" height="130px" width="130px" style="border-radius: 50%" />
+          <img src="./assets/img/images (7).jpeg.jpg" alt="" height="130px" width="130px" style="border-radius: 50%" />
+          <img src="./assets/img/iim.jpg" alt="" height="130px" width="130px" style="border-radius: 50%" />
+          <img src="./assets/img/FB_IMG_1727524441531.jpg" alt="" height="130px" width="130px"
+            style="border-radius: 50%" />
+          <img src="./assets/1.jpg" alt="" height="130px" width="130px" style="border-radius: 50%" />
+          <img src="./assets/2.jpg" alt="" height="130px" width="130px" style="border-radius: 50%" />
+          <img src="./assets/3.jpg" alt="" height="130px" width="130px" style="border-radius: 50%" />
+          <img src="./assets/4.jpg" alt="" height="130px" width="130px" style="border-radius: 50%" />
+          <img src="./assets/5.jpg" alt="" height="130px" width="130px" style="border-radius: 50%" />
+          <img src="./assets/6.jpg" alt="" height="130px" width="130px" style="border-radius: 50%" />
+          <img src="./assets/7.jpg" alt="" height="130px" width="130px" style="border-radius: 50%" />
+          <img src="./assets/8.jpg" alt="" height="130px" width="130px" style="border-radius: 50%" />
+          <img src="./assets/9.jpeg" alt="" height="130px" width="130px" style="border-radius: 50%" />
+          <img src="./assets/10.jpg" alt="" height="130px" width="130px" style="border-radius: 50%" />
+        </div>
+      </marquee>
+    </div>
+    <div id="snackbar">Form Submitted Successfully!</div>
+    <div id="snackbarr">All fields are required!</div>
+  </main>
+
+  <footer class="page-footer">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-4 py-3">
+          <a href="index.html">
+            <img src="./assets/logo.png" style="
+                  width: 150px;
+                  object-fit: contain;
+                  margin-bottom: 10px;
+                  margin-top: -20px;
+                  padding: 0;
+                " />
+          </a>
+          <p>TAKING BRANDS FORWARD WITH SMART SOLUTIONS</p>
+
+          <p><a href="mailto:info@growtechs.in"> info@growtechs.in</a></p>
+          <p><a href="tel:+919435984424">+919435984424</a></p>
+        </div>
+        <div class="col-lg-4 py-3">
+          <h5>Quick Links</h5>
+          <ul class="footer-menu">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="./assets/Brochure Growtechs.pdf" target="_blank">Brochure</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 py-3">
+          <h5>Social Media Links</h5>
+          <div class="sosmed-button mt-4">
+            <a href="https://www.facebook.com/profile.php?id=61565515774765&mibextid=rS40aB7S9Ucbxw6v"
+              target="_blank"><span class="mai-logo-facebook-f"></span></a>
+            <a href="https://www.instagram.com/growtechs.in?igsh=MTQyaWl5czNja3F2cQ==" target="_blank"><span
+                class="mai-logo-instagram"></span></a>
+            <a href="https://www.linkedin.com/company/growtechs1/" target="_blank"><span
+                class="mai-logo-linkedin"></span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6 py-2">
+          <p id="copyright">
+            &copy; 2024 <a href="https://macodeid.com/">GrowTechs</a>. All
+            rights reserved
+          </p>
+        </div>
+        <div class="col-sm-6 py-2 text-right">
+          <div class="d-inline-block px-3">
+            <!-- <a href="#">Privacy</a> -->
+          </div>
+          <div class="d-inline-block px-3">
+            <!-- <a href="#">Contact Us</a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- .container -->
+  </footer>
+
+  <script src="./assets/js/jquery-3.5.1.min.js"></script>
+
+  <script src="./assets/js/bootstrap.bundle.min.js"></script>
+
+  <script src="./assets/vendor/wow/wow.min.js"></script>
+
+  <script src="./assets/vendor/owl-carousel/js/owl.carousel.min.js"></script>
+
+  <script src="./assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+
+  <script src="./assets/vendor/animateNumber/jquery.animateNumber.min.js"></script>
+
+  <script src="./assets/js/google-maps.js"></script>
+
+  <script src="./assets/js/theme.js"></script>
+</body>
+
+</html>
